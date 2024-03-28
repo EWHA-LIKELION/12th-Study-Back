@@ -1,0 +1,69 @@
+<head>
+    <style>
+        body {
+            background-image: url('https://mblogthumb-phinf.pstatic.net/MjAyMDAzMDFfMTU4/MDAxNTgzMDc0MDk2Nzkx.QUnYbAdNAiMNfQjZxURYkxOMUXj3Fa1WEGK7CROMF2Eg.KDtfEz148FLkfmkQ3PikzYkCpr2qjEQMN1iLs-g5rIcg.JPEG.sehviolon/8_PC_2.jpg?type=w800'); 
+            background-size: cover; 
+            background-repeat: no-repeat; 
+            font-family: 'Pretendard Variable', sans-serif;
+            margin: 0; 
+            padding: 0; 
+        }
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: 'Pretendard Variable', sans-serif;
+            
+        }
+
+        
+        h1 {
+            font-size: 35px;
+            color: white;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9); 
+            
+        }
+
+        
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        
+        li {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            
+        }
+
+        
+        a {
+            text-decoration: none;
+            color: yellow;
+            font-size: 20px;
+        }
+
+        
+        span {
+            color: white;
+            margin-left: 10px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>🐳 JIEUN의 질문 목록 웹페이지 입니다 🐳</h1>
+        <h1 ></h1>
+        <h1 >질문 목록 화면</h1>
+
+        <ul>
+            {% for question in questions %}
+            <li><a href="{% url 'detail' pk=question.id %}">{{question.title}}</a>
+            <span>{{question.upload_time}}</span></li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
