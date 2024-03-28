@@ -1,0 +1,22 @@
+<body>
+    <div>
+        <h1>{{ post.title }}</h1>
+        <br>
+        <span>{{ post.upload_time }}</span>
+        <div class="content">{{ post.content }}</div>
+        <div class="questionType">
+            <p>
+                <strong>코딩 관련 유무:</strong> 
+                    {% if not post.questionType %}
+                        <span style="color: blue;">
+                        코딩 관련 아님
+                        </span>
+                    {% else %}
+                        <span style="color:red;">
+                        코딩 관련
+                        </span>
+                    {% endif %}
+            </p>
+        </div>
+    </div>
+</body>
