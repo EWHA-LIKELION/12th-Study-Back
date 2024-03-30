@@ -1,0 +1,164 @@
+@font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'GangwonEduPowerExtraBoldA';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEduPowerExtraBoldA.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: 'Pretendard-Regular';
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+  font-weight: 500;
+}
+
+header {
+  background-color: #ffffff;
+  padding: 20px;
+  border-bottom: 2px solid #02b875;
+}
+
+.logo {
+  text-decoration: none;
+  color: #000;
+  font-size: 24px;
+  font-weight: bold;
+  margin-right: 30px;
+}
+
+#navher {
+  font-family: 'GangwonEduPowerExtraBoldA';
+  color: #1EC800;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+#in {
+  font-weight: 200;
+  font-size: 35px;
+}
+
+.containerContent {
+  max-width: 100%;
+  margin: auto;
+  padding:  2% 30%;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.name {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+#Q {
+  color: #1EC800;
+  font-size: 44px;
+  font-weight: 100;
+  margin-right: 10px;
+}
+
+.content {
+  font-size: 18px;
+  color: #555;
+  line-height: 1.6;
+  margin: 20px 5px;
+}
+
+.image {
+  max-width: 80%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.category {
+  font-weight: bold;
+  color: #3867e8;
+  font-size: 14px;
+}
+
+#time {
+  font-size: 13px;
+  color: #888;
+}
+/* body {
+  font-family: 'Pretendard-Regular';
+  font-size: 20px;
+  maring: 50px 30px;
+  padding: 30px;
+}
+
+a {
+  text-decoration-line: none;
+  color: black;
+}
+#in {
+  font-weight: 200;
+  font-size: 40px;
+}
+
+#navher {
+  font-family: GangwonEduPowerExtraBoldA;
+  color: #1EC800;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+#table {
+  display: flex;
+  padding: 30px;
+}
+
+#Q {
+  font-family: Pretendard-Regular;
+  color: #1EC800;
+  font-weight: 200;
+  font-size: 44px;
+  padding-right: 10px;
+}
+.name{
+  font-size: 24px;
+  line-height: 36px;
+  font-weight: 800;
+}
+#name{
+  width: 400px;
+}
+
+header {
+  margin: 30px 10px;
+}
+
+.containerContent{
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  padding: 30px 40px;
+}
+
+.category {
+  color: #3867e8;
+  font-size: 14px;
+}
+
+#time {
+  color: #909090;
+  font-size: 13px;
+}
+.listCategory{
+
+}
+img {
+  width: 30%;
+} */

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>네입허 지민iN</title>
+  <link rel="stylesheet" href="static/css/list.css" />
+</head>
+<body>
+  <div class="content">
+    <header>
+      <a class="logo" href="{% url 'main'%}"><span id="navher">NAVHER</span> <span id="in">지민iN</span></a>
+      <h2>Q&A</h2>
+    <header>
+
+    <div id="table">
+      <table class="listTable">
+        <tr class="listName">
+          <td id="name">제목</td>
+          <td id="subject">분야</td>
+          <td class="upload_time">작성시간</td>
+        </tr>
+        {% for post in posts %}
+          <tr class="list">
+            <td><a href="{% url 'detail' pk=post.id %}">{{post.title}}</a></td>
+            <td><span class="listCategory">{{post.category}}</span></td>
+            <td><span class="upload_time">{{post.upload_time}}</span></td>
+          </tr>         
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+</body>
+</html>
