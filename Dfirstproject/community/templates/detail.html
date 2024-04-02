@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{post.title}}</title>
+  <link rel="stylesheet" href="static/css/detail.css" />
+</head>
+<body>
+  <header>
+    <a class="logo" href="{% url 'main'%}"><span id="navher">NAVHER</span> <span id="in">지민iN</span></a>
+  </header>
+  
+  <div class="containerContent">
+    <span class="name"><span id="Q">Q</span> {{ post.title }}</span>
+    <div class="content">{{ post.content }}</div>
+    {% if post.image %}
+      <img class="image" src="{{ post.image.url }}" />
+    {% endif %}
+    <h2 class="category">≡ {{post.category}}</h2>
+    <br>
+    <span id="time">{{ post.upload_time }}</span>
+  </div>
+</body>
+</html>
