@@ -18,8 +18,15 @@ from django.contrib import admin
 from django.urls import path
 from community.views import List, detail
 
+import community.views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', List, name="main"),
-    path('<int:pk>', detail, name="detail"),
+    path('<int:question_id>', detail, name="detail"),
+    path('',community.views.List, name='list'),
+    path('post/<int:question_id>', community.views.detail, name="detail"),
+    path('new/', community.views.new, name="new"),
+    path('create/', community.views.create, name="create"),
+    path('delete/<int:question_id>', community.views.delete,name="delete"),
+    path('update/<int:question_id>', community.views.update,name="update"),
 ]

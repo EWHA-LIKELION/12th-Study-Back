@@ -1,9 +1,13 @@
 <body>
     <div>
         <h1>{{ post.title }}</h1>
+        {{post.title}}
         <br>
         <span>{{post.upload_time }}</span>
+        {{post.body}}
         <div class="content">{{ post.content }}</div>
+        <a href="{% url 'delete' post.id %}">삭제하기!!</a>
+        <a href="{% url 'update' post.id %}">수정하기!!</a>
     </div>
     </div>
 </body>
