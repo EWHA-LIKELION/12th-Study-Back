@@ -1,0 +1,70 @@
+<head>
+    <style>
+      body {
+            font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+            background-image: url('https://blog.kakaocdn.net/dn/z8QZo/btqDwemyFyI/Xjjt1rN0QBYwMrzXQBWKxK/img.jpg'); 
+            background-size: cover; 
+            background-repeat: no-repeat; 
+            
+            text-align: center; 
+            margin: 20px; 
+            padding: 0; 
+            color: white;
+            
+           
+        }
+
+        h1 {
+            margin-top: 50px; 
+            color: #fff; 
+        }
+
+        span {
+            display: block; 
+            margin-bottom: 20px; 
+            color: #fff; 
+        }
+
+        .content {
+            padding: 20px; 
+            background-color: #f9f9f9; 
+            border-radius: 10px; 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+            margin: 0 auto; 
+            width: 80%; 
+        }
+        .text-box {
+        background-color: white;
+        border: 2px solid #ccc;
+        border-radius: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        width: 60%;
+        margin: 0 auto;
+        }
+
+    .text-box h4 {
+        
+        color: #333;
+        font-size: 20px; /* h4의 글꼴 크기 */
+        margin-bottom: 10px; /* h4과 다음 요소 사이의 간격 */
+    }
+
+    .text-box p {
+        
+        color: #333;
+        font-size: 16px;
+        line-height: 1.5;
+    }
+    h4{
+        margin-top: -5px;
+    }
+    </style>
+    
+<div class="text-box">
+    <h4>{{question.title}}</h4>
+    <p>{{question.date}}</p>
+    <p>{{question.body}}</p>
+    <a href="{% url 'home' %}">홈으로 돌아가기</a>
+    <a href="{% url 'delete' question.id %}">삭제하기</a>
+</div>
