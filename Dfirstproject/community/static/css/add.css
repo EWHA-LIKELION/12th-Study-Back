@@ -1,0 +1,112 @@
+@font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'GangwonEduPowerExtraBoldA';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEduPowerExtraBoldA.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+header {
+  background-color: #ffffff;
+  padding: 20px;
+  border-bottom: 2px solid #02b875;
+}
+
+.logo {
+  text-decoration: none;
+  color: #000;
+  font-size: 24px;
+  font-weight: bold;
+  margin-right: 30px;
+}
+
+#navher {
+  font-family: 'GangwonEduPowerExtraBoldA';
+  color: #1EC800;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+#in {
+  font-weight: 200;
+  font-size: 35px;
+}
+
+body {
+  font-family: 'Pretendard-Regular';
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+  font-weight: 500;
+}
+.container {
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.form-container{
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+}
+
+/* 제목 스타일 */
+h1 {
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* 폼 스타일 */
+form {
+  padding: 20px;
+  border-radius: 8px;
+}
+
+/* 입력 필드 스타일 */
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #052100;
+  border-radius: 5px;
+  background-color: #f8f9fa;
+  box-sizing: border-box;
+}
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 17px;
+  font-weight: 700;
+
+}
+/* 제출 버튼 스타일 */
+button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  background-color: #1EC800;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #19a400;
+}

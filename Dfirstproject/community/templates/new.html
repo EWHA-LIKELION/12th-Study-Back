@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/add.css" />
+    {% block head %}
+    <title>new</title>
+    {% endblock %}
+    
+</head>
+<body>
+    <header>
+        <a class="logo" href="{% url 'main'%}"><span id="navher">NAVHER</span> <span id="in">지민iN</span></a>
+    </header>
+    {% block content %}
+    <div class="container">
+        <h1>Q&A</h1>
+        <div class="form-container">
+            <form action="{% url 'create' %}" method="post" enctype="multipart/form-data">
+
+                {% csrf_token %}
+                {{form.as_p}}
+                <!-- <p>제목: <input type="text" name="title"></p>
+                본문 : <textarea name="content" cols="30" rows="10"></textarea> -->
+                <button type="submit">제출</button>
+                
+            </form>
+        </div>
+        
+    </div>
+    
+    {% endblock %}
+</body>
+</html>
