@@ -29,4 +29,7 @@ urlpatterns = [
     path('create/', community.views.create, name="create"),
     path('delete/<int:question_id>', community.views.delete,name="delete"),
     path('update/<int:question_id>', community.views.update,name="update"),
+    path('<int:question_id>/comment', community.views.add_comment,name="add_comment"),
+    path('like/<int:question_id>',community.views.likes,name="likes"),
+
 ]
