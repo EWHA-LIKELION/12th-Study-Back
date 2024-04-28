@@ -16,13 +16,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from community.views import List, detail
+from community.views import List, detail, new, create, delete, update_page, update
 from django.conf import settings
 from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', List, name="main"),
     path('<int:pk>', detail, name="detail"),
+    path('new/', new, name="new"),
+    path('create/', create, name="create"),
+    path('delete/<int:pk>', delete, name="delete"),
+    path('update_page/<int:pk>', update_page, name="update_page"),
+    path('update/<int:pk>', update,name="update"),
 ]
+
+
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

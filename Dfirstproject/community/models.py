@@ -19,11 +19,11 @@ SUBJECTS = (
 )
 
 class Question(models.Model):
-  title = models.CharField('Title', max_length=50)
+  title = models.CharField('제목', max_length=50)
   upload_time = models.DateTimeField(unique=True)
-  content = models.TextField('Content')
-  image = models.ImageField('Image', blank=True)
-  category = models.CharField('Category', max_length=20, choices = SUBJECTS, default='uncategorized')
+  content = models.TextField('내용')
+  image = models.ImageField('사진', blank=True)
+  category = models.CharField('분야', max_length=20, choices = SUBJECTS, default='uncategorized')
 
 
   def __str__(self):

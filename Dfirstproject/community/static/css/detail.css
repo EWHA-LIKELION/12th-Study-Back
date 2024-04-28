@@ -92,6 +92,14 @@ header {
   font-size: 13px;
   color: #888;
 }
+a {
+  text-decoration-line: none;
+  color: #888;
+}
+.modify{
+  margin: 10px 0px;
+}
+
 /* body {
   font-family: 'Pretendard-Regular';
   font-size: 20px;

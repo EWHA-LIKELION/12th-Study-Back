@@ -21,6 +21,10 @@
     <h2 class="category">≡ {{post.category}}</h2>
     <br>
     <span id="time">{{ post.upload_time }}</span>
+    <div class="mod">
+      <a class="modify" href="{% url 'update' pk=post.id %}">수정</a>
+      <a class="modify" href="{% url 'delete' pk=post.id %}">삭제</a>
+    </div>
   </div>
 </body>
 </html>
