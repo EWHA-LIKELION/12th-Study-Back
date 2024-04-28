@@ -16,10 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from community.views import List,detail
+from community.views import home, detail, new, create, delete, update_page, update
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', List, name="main"),
-    path('<int:pk>', detail, name="detail"),
+    path('', home, name="home"),
+    path('question/<int:question_id>', detail, name="detail"),
+    path('new/', new, name="new"),
+    path('create/', create, name="create"),
+    path('delete/<int:question_id>', delete, name="delete"),
+    path('update_page/<int:question_id>', update_page, name="update_page"),
+    path('update/<int:question_id>', update, name="update"),
 ]

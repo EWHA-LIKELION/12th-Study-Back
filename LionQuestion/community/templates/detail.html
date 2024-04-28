@@ -1,0 +1,7 @@
+<h3>{{question.title}}</h3>
+{{question.upload_time}}
+<br />
+{{question.content}}
+
+<a href="{% url 'delete' question.id %}">삭제하기</a>
+<a href="{% url 'update' question.id %}">수정하기</a>

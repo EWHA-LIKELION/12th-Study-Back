@@ -1,0 +1,9 @@
+<h1>질문 프로젝트</h1>
+<a href="{% url 'new' %}">새로운 글 만들기</a>
+
+{% for question in questions.all %}
+    <h3>{{question.title}}</h3> 
+    {{question.upload_time}}
+    <br />
+    <a href="{%url 'detail' question.id%}">이 글 확인하기</a>
+{% endfor %}
