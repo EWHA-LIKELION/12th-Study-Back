@@ -58,20 +58,24 @@
     button:hover {
         background-color: #0056b3;
     }
+    
     </style>
 </head>
 <body>
     {% block content %}
-    <h1>새로운 질문 작성</h1>
+    <h1>Creating Blog</h1>
 
     <form action="{% url 'create' %}" method="post" enctype="multipart/form-data">
 
         {% csrf_token %}
-        {{form.as_p}}
+        {{ form.as_p }}
+        해시태그 <input type="text" name="hashtags" placeholder="해시태그 , 로 구분">
+
 
         <button type="submit">제출</button>
         
     </form>
     {% endblock %}
+    
 </body>
 </html>
