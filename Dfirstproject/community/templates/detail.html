@@ -5,7 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{question.title}}</title>
-  <link rel="stylesheet" href="static/css/detail.css" />
+  <link rel="stylesheet" href="/static/css/detail.css" />
+  <script src="https://kit.fontawesome.com/892199cbed.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <header>
@@ -26,19 +27,22 @@
       #{{ hashtag }}
       {% endfor %}
     </div>
+    <div class="like">
+      <p>♡ {{ question.like_count }}</p>
+    </div>
     <div class="mod">
       <a class="modify" href="{% url 'update' pk=question.id %}">수정</a>
       <a class="modify" href="{% url 'delete' pk=question.id %}">삭제</a>
     </div>
   </div>
-
+  
   <div class="commentContainer">
     <a class="add_comment" href="{% url 'add_comment' pk=question.id %}">답변달기</a>
     {% for comment in question.comments.all %}
       <div class="comment">
-        <strong class="username">{{ comment.username }}</strong>
-        <div class="date">{{ comment.created_at }}</div>
-        <p>{{ comment.comment_text | linebreaks }}</p>
+        <strong class="Cusername">{{ comment.username }}</strong>
+        <div class="Cdate">{{ comment.created_at }}</div>
+        <p class="Ccomment_text">{{ comment.comment_text | linebreaks }}</p>
       </div>
     {% empty %}
       <p>아직 댓글이 없어요</p>

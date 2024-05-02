@@ -109,6 +109,9 @@ def add_comment(request, pk):
         if form.is_valid():
             comment = form.save(commit=False)
             comment.question = question 
+            if (comment.is_like):
+              question.like_count = question.like_count + 1
+            question.save()
             comment.save()
             return redirect('detail', pk)
 
