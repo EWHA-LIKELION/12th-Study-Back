@@ -26,11 +26,11 @@
           <td id="subject">분야</td>
           <td class="upload_time">작성시간</td>
         </tr>
-        {% for post in posts %}
+        {% for question in questions %}
           <tr class="list">
-            <td><a href="{% url 'detail' pk=post.id %}">{{post.title}}</a></td>
-            <td><span class="listCategory">{{post.category}}</span></td>
-            <td><span class="upload_time">{{post.upload_time}}</span></td>
+            <td><a href="{% url 'detail' pk=question.id %}">{{question.title}}</a></td>
+            <td><span class="listCategory">{{question.category}}</span></td>
+            <td><span class="upload_time">{{question.upload_time}}</span></td>
           </tr>         
         {% endfor %}
       </table>

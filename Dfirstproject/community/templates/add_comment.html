@@ -17,17 +17,15 @@
     </header>
     {% block content %}
     <div class="container">
-        <h1>Q&A</h1>
+        <h1>답변달기</h1>
         <div class="form-container">
-            <form action="{% url 'create' %}" method="post" enctype="multipart/form-data">
+            <form class="post-form" method="POST" >
 
                 {% csrf_token %}
                 {{form.as_p}}
-                해시태그 <input type="text" name = "hashtags" placeholder="해시태그 ,로 구분">
-                
                 <!-- <p>제목: <input type="text" name="title"></p>
                 본문 : <textarea name="content" cols="30" rows="10"></textarea> -->
-                <button type="submit">제출</button>
+                <button type="submit" class="save btn btn-default">제출</button>
                 
             </form>
         </div>

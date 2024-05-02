@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{post.title}}</title>
+  <title>{{question.title}}</title>
   <link rel="stylesheet" href="static/css/detail.css" />
 </head>
 <body>
@@ -13,18 +13,36 @@
   </header>
   
   <div class="containerContent">
-    <span class="name"><span id="Q">Q</span> {{ post.title }}</span>
-    <div class="content">{{ post.content }}</div>
-    {% if post.image %}
-      <img class="image" src="{{ post.image.url }}" />
+    <span class="name"><span id="Q">Q</span> {{ question.title }}</span>
+    <div class="content">{{ question.content }}</div>
+    {% if question.image %}
+      <img class="image" src="{{ question.image.url }}" />
     {% endif %}
-    <h2 class="category">≡ {{post.category}}</h2>
+    <h2 class="category">≡ {{question.category}}</h2>
     <br>
-    <span id="time">{{ post.upload_time }}</span>
-    <div class="mod">
-      <a class="modify" href="{% url 'update' pk=post.id %}">수정</a>
-      <a class="modify" href="{% url 'delete' pk=post.id %}">삭제</a>
+    <span id="time">{{ question.upload_time }}</span>
+    <div class="hashTag">
+      {% for hashtag in hashtags.all %}
+      #{{ hashtag }}
+      {% endfor %}
     </div>
+    <div class="mod">
+      <a class="modify" href="{% url 'update' pk=question.id %}">수정</a>
+      <a class="modify" href="{% url 'delete' pk=question.id %}">삭제</a>
+    </div>
+  </div>
+
+  <div class="commentContainer">
+    <a class="add_comment" href="{% url 'add_comment' pk=question.id %}">답변달기</a>
+    {% for comment in question.comments.all %}
+      <div class="comment">
+        <strong class="username">{{ comment.username }}</strong>
+        <div class="date">{{ comment.created_at }}</div>
+        <p>{{ comment.comment_text | linebreaks }}</p>
+      </div>
+    {% empty %}
+      <p>아직 댓글이 없어요</p>
+    {% endfor %}
   </div>
 </body>
 </html>

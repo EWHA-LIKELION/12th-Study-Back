@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from community.views import List, detail, new, create, delete, update_page, update
+from community.views import *
 from django.conf import settings
 from django.conf.urls.static import static
 urlpatterns = [
@@ -28,6 +28,7 @@ urlpatterns = [
     path('delete/<int:pk>', delete, name="delete"),
     path('update_page/<int:pk>', update_page, name="update_page"),
     path('update/<int:pk>', update,name="update"),
+    path('<int:pk>/comment', add_comment,name="add_comment"),
 ]
 
 

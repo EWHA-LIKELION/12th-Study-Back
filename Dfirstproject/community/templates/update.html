@@ -16,9 +16,10 @@
     <div class="container">
       <h1>Q&A</h1>
       <div class="form-container">
-        <form action="{% url 'update' pk=post.id %}" method="post">
+        <form action="{% url 'update' pk=question.id %}" method="post">
           {% csrf_token %}
           {{form.as_p}}
+          해시태그 <input type="text" name = "hashtags" placeholder="해시태그 ,로 구분">
           <!-- <p>제목: <input type="text" name="title" value="{{post.title}}" /></p>
           본문 :
           <textarea name="content" cols="30" rows="10"> {{post.content}} </textarea> -->
