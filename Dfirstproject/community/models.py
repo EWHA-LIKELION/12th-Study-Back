@@ -31,7 +31,7 @@ class Question(models.Model):
   content = models.TextField('내용')
   image = models.ImageField('사진', blank=True)
   category = models.CharField('분야', max_length=20, choices = SUBJECTS, default='uncategorized')
-  like_count = models.IntegerField(default=0)
+  recommend_count = models.IntegerField(default=0)
   hashtag = models.ManyToManyField(HashTag)
 
   def __str__(self):
@@ -45,7 +45,6 @@ class Comment(models.Model):
   username = models.CharField('닉네임', max_length=20)
   comment_text = models.TextField('답변 내용')
   created_at = models.DateTimeField(default=timezone.now)
-  is_like = models.BooleanField('좋아요', default=False)
 
   def approve(self):
     self.save()
@@ -53,3 +52,6 @@ class Comment(models.Model):
   def __str__(self):
     return self.comment_text
   
+class Recommend(models.Model):
+  question = models.ForeignKey(Question, related_name='recommend', on_delete=models.CASCADE)
+  is_recommend = models.BooleanField('좋아요', default=False)

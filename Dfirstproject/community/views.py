@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from community.models import *
-from .forms import PostForm, CommentForm
+from .forms import *
 # Create your views here.
 
 def List(request):
@@ -109,9 +109,9 @@ def add_comment(request, pk):
         if form.is_valid():
             comment = form.save(commit=False)
             comment.question = question 
-            if (comment.is_like):
-              question.like_count = question.like_count + 1
-            question.save()
+            # if (comment.is_like):
+            #   question.like_count = question.like_count + 1
+            # question.save()
             comment.save()
             return redirect('detail', pk)
 
@@ -119,3 +119,20 @@ def add_comment(request, pk):
         form = CommentForm()
 
     return render(request, 'add_comment.html', {'form': form})
+
+def add_recommend(request, pk):
+  question = get_object_or_404(Question, pk=pk)
+  if request.method == 'POST':
+    form = RecommendForm(request.POST)
+
+    if form.is_valid():
+      recommend = form.save(commit=False)
+      recommend.question = question
+      if (recommend.is_recommend):
+        question.recommend_count = question.recommend_count + 1
+      question.save()
+      recommend.save()
+      return redirect('detail', pk)
+  else:
+    form = RecommendForm()
+  return render(request, 'add_recommend.html', {'form': form})

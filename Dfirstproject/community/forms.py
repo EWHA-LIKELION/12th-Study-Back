@@ -1,6 +1,6 @@
 from dataclasses import field
 from django import forms
-from .models import Question, Comment
+from .models import Question, Comment, Recommend
 
 class PostForm(forms.ModelForm):
   class Meta:
@@ -10,4 +10,9 @@ class PostForm(forms.ModelForm):
 class CommentForm(forms.ModelForm):
   class Meta:
     model = Comment
-    fields = ['username', 'comment_text', 'is_like']
+    fields = ['username', 'comment_text']
+
+class RecommendForm(forms.ModelForm):
+  class Meta:
+    model = Recommend
+    fields = ['is_recommend']

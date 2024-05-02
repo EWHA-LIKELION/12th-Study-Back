@@ -29,6 +29,7 @@ urlpatterns = [
     path('update_page/<int:pk>', update_page, name="update_page"),
     path('update/<int:pk>', update,name="update"),
     path('<int:pk>/comment', add_comment,name="add_comment"),
+    path('<int:pk>/recommend', add_recommend,name="add_recommend"),
 ]
 
 
