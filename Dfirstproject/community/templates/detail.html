@@ -33,7 +33,7 @@
 </div>
 
 <div>
-    <form action="{% url 'likes' post.id %}" method='POST'>
+    <form action="{% url 'likes' question_id=post.id %}" method='POST'>
         {% csrf_token %}
           {% if user in post.like_users.all %}
           <button class="btn btn-link text-danger">
