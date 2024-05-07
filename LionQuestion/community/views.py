@@ -3,6 +3,7 @@ from .models import Question, HashTag
 from .forms import QuestionForm, CommentForm
 from django.utils import timezone
 
+
 # Create your views here.
 def home(request):
     questions = Question.objects
@@ -11,7 +12,7 @@ def home(request):
 def detail(request, question_id):
     question_detail = get_object_or_404(Question, pk=question_id)
     question_hashtag = question_detail.hashtag.all()
-    return render(request, 'detail.html', {'question':question_detail}, {'hashtags':question_hashtag})
+    return render(request, 'detail.html', {'question':question_detail, 'hashtags':question_hashtag})
 
 def new(request):
     return render(request, 'new.html')
@@ -30,7 +31,7 @@ def create(request):
         for tag in hashtag:
             new_hashtag=HashTag.objects.get_or_create(hashtag=tag)
             new_question.hashtag.add(new_hashtag[0])
-        return redirect('detail', new_question.id)
+        return redirect(request, 'detail.html', new_question.id)
     return redirect('home')
 
 def delete(request, question_id):
@@ -64,7 +65,7 @@ def add_comment(request, question_id):
             comment = form.save(commit=False)
             comment.Question=blog
             comment.save()
-            return redirect('detail', question_id)
+            return redirect(request, 'detail.html', question_id)
     else : 
         form = CommentForm()
     

@@ -8,12 +8,12 @@
     {% endfor %}
 </div>
 <br/ >
-<a href="{% url 'delete' question.id %}">삭제하기</a>
-<a href="{% url 'update' question.id %}">수정하기</a>
+<a href="{% url 'delete' question.id %}">삭제</a>
+<a href="{% url 'update' question.id %}">수정</a>
 <hr>
 
 <br/ >
-<a class = "add_comment" href="{% url 'add_comment' question.id %}">댓글 달기</a>
+<a class = "add_comment" href="{% url 'add_comment' question.id %}">답변 달기</a>
 
 {% for comment in question.comments.all %}
     <div class="comment">
@@ -22,5 +22,5 @@
         <p>{{ comment.comment_text | linebreaks }}</p>
     </div>
 {% empty %}
-    <p>아직 댓글이 없어요</p>
+    <p>아직 댓글이 없습니다.</p>
 {% endfor %}

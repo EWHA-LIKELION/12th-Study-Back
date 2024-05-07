@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from community.views import *
+import accounts.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,4 +29,8 @@ urlpatterns = [
     path('update_page/<int:question_id>', update_page, name="update_page"),
     path('update/<int:question_id>', update, name="update"),
     path('<int:question_id>/comment', add_comment, name="add_comment"),
+
+    path('accounts/login', accounts.views.login_view, name='login'),
+    path('accounts/logout', accounts.views.logout_view, name='logout'),
+    path('accounts/signup', accounts.views.signup_view, name='signup'),
 ]
