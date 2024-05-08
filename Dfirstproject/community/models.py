@@ -1,5 +1,12 @@
 from django.db import models
+from django.utils import timezone
 import os
+
+class HashTag(models.Model):
+  hashtag = models.CharField(max_length=100)
+
+  def __str__(self):
+    return self.hashtag
 
 # Create your models here.
 SUBJECTS = (
@@ -24,10 +31,27 @@ class Question(models.Model):
   content = models.TextField('내용')
   image = models.ImageField('사진', blank=True)
   category = models.CharField('분야', max_length=20, choices = SUBJECTS, default='uncategorized')
-
+  recommend_count = models.IntegerField(default=0)
+  hashtag = models.ManyToManyField(HashTag)
 
   def __str__(self):
     return self.title
   
   def get_filename(self):
     return os.path.basename(self.file.name)
+  
+class Comment(models.Model):
+  question = models.ForeignKey(Question, related_name='comments', on_delete=models.CASCADE)
+  username = models.CharField('닉네임', max_length=20)
+  comment_text = models.TextField('답변 내용')
+  created_at = models.DateTimeField(default=timezone.now)
+
+  def approve(self):
+    self.save()
+  
+  def __str__(self):
+    return self.comment_text
+  
+class Recommend(models.Model):
+  question = models.ForeignKey(Question, related_name='recommend', on_delete=models.CASCADE)
+  is_recommend = models.BooleanField('좋아요', default=False)

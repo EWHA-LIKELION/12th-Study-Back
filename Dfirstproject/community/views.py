@@ -1,16 +1,17 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
-from community.models import Question
-from .forms import PostForm
+from community.models import *
+from .forms import *
 # Create your views here.
 
 def List(request):
   questions = Question.objects.filter(upload_time__lte = timezone.now()).order_by('upload_time')
-  return render(request, 'list.html', {'posts': questions})
+  return render(request, 'list.html', {'questions': questions})
 
 def detail(request, pk):
   question = get_object_or_404(Question, pk=pk)
-  return render(request, 'detail.html', {'post': question})
+  question_hashtag = question.hashtag.all()
+  return render(request, 'detail.html', {'question': question, 'hashtags':question_hashtag})
 
 # 여기서 'posts'와 'post'를 'question'으로 바꿔서 rendering이 안되는 일이 발생! 왜지?
 
@@ -25,6 +26,11 @@ def create(request):
     new_question=form.save(commit=False)
     new_question.upload_time = timezone.now()
     new_question.save()
+    hashtags = request.POST['hashtags']
+    hashtag = hashtags.split(", ")
+    for tag in hashtag:
+      new_hashtag = HashTag.objects.get_or_create(hashtag=tag)
+      new_question.hashtag.add(new_hashtag[0])
     return redirect('detail', new_question.id)
   return redirect('main')
   # new_question = Question()
@@ -58,7 +64,7 @@ def delete(request, pk):
 def update_page(request, pk):
   question_update=get_object_or_404(Question, pk=pk)
   form = PostForm(instance=question_update)
-  return render(request, 'update.html', {'form': form, 'post': question_update})
+  return render(request, 'update.html', {'form': form, 'question': question_update})
 
 
 def update(request, pk):
@@ -73,4 +79,60 @@ def update(request, pk):
       return redirect('detail', pk)
   else:
     form = PostForm(instance=question_update)
-    return render(request, 'update.html', {'form': form, 'post': question_update})
+    return render(request, 'update.html', {'form': form, 'question': question_update})
+
+# def add_comment(request, pk):
+#   community = CommentForm(request.POST)
+
+#   if request.method == 'POST':
+#     form = CommentForm(request.POST)
+
+#     if form.is_valid():
+#       comment = form.save(commit=False)
+#       comment.post = community
+#       comment.save()
+#       return redirect('detail', pk)
+    
+#   else:
+#     form = CommentForm()
+  
+#   return render(request, 'add_comment.html', {'form': form})
+
+def add_comment(request, pk):
+    # pk는 어떤 질문(Question)에 대한 ID인지를 나타냅니다.
+
+    question = get_object_or_404(Question, pk=pk)
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.question = question 
+            # if (comment.is_like):
+            #   question.like_count = question.like_count + 1
+            # question.save()
+            comment.save()
+            return redirect('detail', pk)
+
+    else:
+        form = CommentForm()
+
+    return render(request, 'add_comment.html', {'form': form})
+
+def add_recommend(request, pk):
+  question = get_object_or_404(Question, pk=pk)
+  if request.method == 'POST':
+    form = RecommendForm(request.POST)
+
+    if form.is_valid():
+      recommend = form.save(commit=False)
+      recommend.question = question
+      if (recommend.is_recommend):
+        question.recommend_count = question.recommend_count + 1
+      question.save()
+      recommend.save()
+      return redirect('detail', pk)
+  else:
+    form = RecommendForm()
+  return render(request, 'add_recommend.html', {'form': form})
