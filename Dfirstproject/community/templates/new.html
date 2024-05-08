@@ -12,12 +12,12 @@
     {% block content %}
     <h1>Creating Blog</h1>
 
-    <form action="{% url 'create' %}" method="post" enctype="multipart/form-data"
-    >
+    <form action="{% url 'create' %}" method="post" enctype="multipart/form-data">
 
         {% csrf_token %}
         {{ form.as_p }}
-       
+        해시태그 <input type="text" name="hashtags" placeholder="해시태그 , 로 구분">
+
 
         <button type="submit">제출</button>
         
