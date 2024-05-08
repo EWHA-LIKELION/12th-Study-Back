@@ -1,7 +1,8 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from .models import Question
+from django.shortcuts import render, get_object_or_404, redirect , HttpResponse
+from .models import *
 from django.utils import timezone
-from .forms import QuestionForm
+from .forms import *
+
 # Create your views here.
 
 def home(request):
@@ -10,7 +11,8 @@ def home(request):
 
 def detail(request,question_id):
     question_detail = get_object_or_404(Question, pk= question_id)
-    return render(request, 'detail.html', {'question': question_detail})
+    question_hashtag=question_detail.hashtag.all()
+    return render(request, 'detail.html', {'question': question_detail, 'hashtags':question_hashtag})
 
 def new(request):
     form=QuestionForm()
@@ -22,6 +24,11 @@ def create(request):
         new_post=form.save(commit=False)
         new_post.date=timezone.now()
         new_post.save()
+        hashtags=request.POST['hashtags']
+        hashtag=hashtags.split(", ")
+        for tag in hashtag:
+            new_hashtag=HashTag.objects.get_or_create(hashtag=tag)
+            new_post.hashtag.add(new_hashtag[0])
         return redirect('detail', new_post.id)
     return redirect('home')
 
@@ -44,3 +51,31 @@ def update(request, question_id):
     question_update.body=request.POST['body']
     question_update.save()
     return redirect('home')
+
+def add_comment(request, question_id):
+    blog = get_object_or_404(Question, pk=question_id)
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = blog
+            comment.save()
+            return redirect('detail', question_id)
+    
+    else:
+        form = CommentForm()
+
+    return render(request, 'add_comment.html', {'form': form })
+
+def likes(request, question_id):
+    if request.method == "POST":
+        bucket = Question.objects.get(id=question_id)
+        if request.user in bucket.like_users.all():
+            bucket.like_users.remove(request.user)
+        else:
+            bucket.like_users.add(request.user)
+        return redirect('detail', question_id=question_id)
+    else:
+        return HttpResponse('Invalid request method', status=405)

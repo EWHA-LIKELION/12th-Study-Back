@@ -9,7 +9,7 @@
             text-align: center; 
             margin: 20px; 
             padding: 0; 
-            color: white;
+            
             
            
         }
@@ -60,11 +60,45 @@
         margin-top: -5px;
     }
     </style>
-    
+</head>
+<body>
 <div class="text-box">
     <h4>{{question.title}}</h4>
     <p>{{question.date}}</p>
     <p>{{question.body}}</p>
+    <br>
+    <div>
+        {% for hashtag in hashtags.all %}
+        #{{ hashtag }}
+        {% endfor%}
+    </div>
     <a href="{% url 'home' %}">홈으로 돌아가기</a>
     <a href="{% url 'delete' question.id %}">삭제하기</a>
 </div>
+<form action="{% url 'likes' question.id %}" method="post">
+    {% csrf_token %}
+    <button class="like-button" type="submit">❤️</button>
+    <span class="small">
+      {{ question.like_users.count }} 명이 이 글을 좋아합니다.
+    </span>
+</form>
+
+
+    
+<br>
+
+<hr>
+<a class="add_comment" href="{% url 'add_comment' question.id %}">댓글달기</a>
+<br>
+{% for comment in question.comments.all %}
+    <div class="comment">
+        <strong class="username">{{comment.username}}</strong>
+        <div class="date">{{comment.created_at }}</div>
+        <p>{{comment.comment_text | linebreaks }}</p>
+    </div>
+
+{% empty %}
+    <p>아직 댓글이 없어요</p>
+{% endfor %}
+</body>
+
