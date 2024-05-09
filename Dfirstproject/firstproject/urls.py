@@ -34,7 +34,7 @@ urlpatterns = [
 
     path('accounts/login', accounts.views.login_view, name='login'),
     path('accounts/logout', accounts.views.logout_view, name='logout'),
-    path('accounts/signup', accounts.views.singup_view, name='signup'),
+    path('accounts/signup', accounts.views.signup_view, name='signup'),
 ]
 
 

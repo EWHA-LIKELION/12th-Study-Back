@@ -118,7 +118,7 @@ def add_comment(request, pk):
     else:
         form = CommentForm()
 
-    return render(request, 'add_comment.html', {'form': form})
+        return render(request, 'add_comment.html', {'form': form})
 
 def add_recommend(request, pk):
   question = get_object_or_404(Question, pk=pk)
@@ -135,4 +135,4 @@ def add_recommend(request, pk):
       return redirect('detail', pk)
   else:
     form = RecommendForm()
-  return render(request, 'add_recommend.html', {'form': form})
+    return render(request, 'add_recommend.html', {'form': form})
