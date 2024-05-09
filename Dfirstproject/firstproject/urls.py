@@ -19,6 +19,7 @@ from django.urls import path
 from community.views import List, detail
 
 import community.views
+import accounts.views 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,5 +32,7 @@ urlpatterns = [
     path('update/<int:question_id>', community.views.update,name="update"),
     path('<int:question_id>/comment', community.views.add_comment,name="add_comment"),
     path('like/<int:question_id>',community.views.likes,name="likes"),
-
+    path('accounts/login', accounts.views.login_view, name="login"),
+    path('accounts/logout', accounts.views.logout_view,name="logout"),
+    path('acconuts/signup', accounts.views.signup_view,name="signup")
 ]

@@ -4,6 +4,20 @@
         <h3 style="color: coral"> 김민솔이 만들었음 (찡긋) + 지민언니의 지분🦋  </h3>  
         <h4 style="color: salmon"> 백엔드 아기사자 </h4>
         <a href="{% url 'new' %}">새로운 글 만들기!</a>
+        
+        {% if not user.is_authenticated %}
+        <a href="{% url 'signup' %}">회원가입하기</a>
+        <a href="{% url 'login' %}">로그인하기</a>
+        {% endif %}
+
+        {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}">로그아웃하기</a>
+            <p>로그인 한 사람: {{ user.username }}
+                <br>
+                <hr>
+                아이디: {{user.username}} 닉네임: {{user.nickname}} 대학: {{user.university}} 위치: {{user.location}} 학과: {{user.department}} 얼마나바보인지뽐내기: {{user.babopower}}
+            </p>
+        {% endif %}
         <ul>
             {% for post in posts.all %}
             <h3>{{post.title}}</h3>
@@ -15,4 +29,5 @@
         </ul>
         <img src="https://img-cdn.theqoo.net/bIwyFC.jpg" alt="myungsoo">
     </div>
+
 </body>
