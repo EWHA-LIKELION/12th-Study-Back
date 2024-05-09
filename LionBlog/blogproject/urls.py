@@ -21,6 +21,7 @@ from django.urls import path
 
 
 import blog.views 
+import accounts.views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', blog.views.home, name='home'),
@@ -32,6 +33,9 @@ urlpatterns = [
     path('update/<int:question_id>', blog.views.update, name="update"),
     path('<int:question_id>/comment', blog.views.add_comment, name="add_comment"),
     path('likes/<int:question_id>/', blog.views.likes, name='likes'),
+    path('accounts/login', accounts.views.login_view, name="login"),
+    path('accounts/logout', accounts.views.logout_view, name="logout"),
+    path('accounts/signup', accounts.views.signup_view, name="signup"),
 
     
 ]
