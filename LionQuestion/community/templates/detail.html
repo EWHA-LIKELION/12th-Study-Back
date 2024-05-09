@@ -7,6 +7,23 @@
     #{{ hashtag }}
     {% endfor %}
 </div>
+
+<br>
+
+<div>
+    <form action="{% url 'like' question.id %}" method='POST'>
+      {% csrf_token %}
+      {% if user in question.likes.all %}
+        <input type="submit" value='좋아요 취소'>
+      {% else %}
+        <input type="submit" value='좋아요'>
+      {% endif %}
+
+      {{ question.likes.count }}
+
+    </form>
+</div>
+
 <br/ >
 <a href="{% url 'delete' question.id %}">삭제</a>
 <a href="{% url 'update' question.id %}">수정</a>
