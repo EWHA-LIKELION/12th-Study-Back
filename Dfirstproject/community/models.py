@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 from django.utils import timezone
 import os
 
@@ -26,12 +27,14 @@ SUBJECTS = (
 )
 
 class Question(models.Model):
+  user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
+  like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_questions')
   title = models.CharField('제목', max_length=50)
   upload_time = models.DateTimeField(unique=True)
   content = models.TextField('내용')
   image = models.ImageField('사진', blank=True)
   category = models.CharField('분야', max_length=20, choices = SUBJECTS, default='uncategorized')
-  recommend_count = models.IntegerField(default=0)
+  # recommend_count = models.IntegerField(default=0)
   hashtag = models.ManyToManyField(HashTag)
 
   def __str__(self):
@@ -42,7 +45,7 @@ class Question(models.Model):
   
 class Comment(models.Model):
   question = models.ForeignKey(Question, related_name='comments', on_delete=models.CASCADE)
-  username = models.CharField('닉네임', max_length=20)
+  user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
   comment_text = models.TextField('답변 내용')
   created_at = models.DateTimeField(default=timezone.now)
 
@@ -55,3 +58,4 @@ class Comment(models.Model):
 class Recommend(models.Model):
   question = models.ForeignKey(Question, related_name='recommend', on_delete=models.CASCADE)
   is_recommend = models.BooleanField('좋아요', default=False)
+
