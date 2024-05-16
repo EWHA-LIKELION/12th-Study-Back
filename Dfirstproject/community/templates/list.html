@@ -1,17 +1,23 @@
 <body>
+{% load static %}
+
+{% block head %}
+<link rel=""stylesheet" href="{% static 'css/test.css' %}">
+<link rel=""stylesheet" href="{% static 'css/test2.css' %}">
+{% endblock %}
     <div class="content">
-        <h1 style="color: blue; text-decoration: underline">질문게시판😻💖😼 </h1>
-        <h3 style="color: coral"> 김민솔이 만들었음 (찡긋) + 지민언니의 지분🦋  </h3>  
-        <h4 style="color: salmon"> 백엔드 아기사자 </h4>
-        <a href="{% url 'new' %}">새로운 글 만들기!</a>
+        <h1 style="color: rgb(77, 77, 196); text-decoration: underline">질문게시판😻💖😼 </h1>
+        <h3 style="color: rgb(190, 126, 102)"> minsol's blog🦋  </h3>  
+        <h4 style="color: rgb(221, 114, 102)"> 백엔드 아기사자 </h4>
+        <a href="{% url 'new' %}">new!</a>
         
         {% if not user.is_authenticated %}
-        <a href="{% url 'signup' %}">회원가입하기</a>
-        <a href="{% url 'login' %}">로그인하기</a>
+        <a href="{% url 'signup' %}">회원가입</a>
+        <a href="{% url 'login' %}">로그인</a>
         {% endif %}
 
         {% if user.is_authenticated %}
-            <a href="{% url 'logout' %}">로그아웃하기</a>
+            <a href="{% url 'logout' %}">로그아웃</a>
             <p>로그인 한 사람: {{ user.username }}
                 <br>
                 <hr>
@@ -29,5 +35,6 @@
         </ul>
         <img src="https://img-cdn.theqoo.net/bIwyFC.jpg" alt="myungsoo">
     </div>
+
 
 </body>

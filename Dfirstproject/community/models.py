@@ -22,8 +22,10 @@ class Question(models.Model):
     upload_time = models.DateTimeField(unique=True, default=timezone.now)
     content=models.TextField('Content')
     hashtag=models.ManyToManyField(HashTag)
-    like_users=models.ManyToManyField(Like, related_name='liked_questions')
-    like_count = models.PositiveIntegerField(default=0)
+    #like_users=models.ManyToManyField(Like, related_name='liked_questions')
+    #like_count = models.PositiveIntegerField(default=0)
+    photo = models.ImageField(blank=True, null=True, upload_to="blog_photo")
+    
     def __str__(self):
         return self.title
      
