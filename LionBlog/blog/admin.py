@@ -5,4 +5,3 @@ from .models import *
 admin.site.register(Question)
 admin.site.register(Comment)
 admin.site.register(HashTag)
-
