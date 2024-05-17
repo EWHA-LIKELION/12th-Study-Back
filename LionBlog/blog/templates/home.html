@@ -2,12 +2,12 @@
     <style>
         body {
             font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
-            background-image: url('https://mblogthumb-phinf.pstatic.net/MjAyMDAzMDFfMTU4/MDAxNTgzMDc0MDk2Nzkx.QUnYbAdNAiMNfQjZxURYkxOMUXj3Fa1WEGK7CROMF2Eg.KDtfEz148FLkfmkQ3PikzYkCpr2qjEQMN1iLs-g5rIcg.JPEG.sehviolon/8_PC_2.jpg?type=w800'); 
-            background-size: cover; 
-            background-repeat: no-repeat; 
-            margin: 70px; 
+            background: url('https://media.giphy.com/media/nh2UibFn9DEd2/giphy.gif') no-repeat center center fixed;
+            background-size: cover; /* Ensures the entire background is covered */
+            margin: 50px; 
             padding: 0; 
             color: white;
+            align-items: center;
         }
         .content {
             max-width: 800px;
@@ -17,7 +17,7 @@
             
         }
         .question-box {
-            background-color: rgba(0, 0, 0, 0.5); /* 반투명한 배경색 적용 */
+            background-color: rgba(1, 1, 1, 0.3); /* 반투명한 배경색 적용 */
             padding: 20px;
             margin-bottom: 20px;
             border-radius: 10px;
@@ -27,9 +27,9 @@
         
         h1 {
             font-size: 35px;
-            color: white;
-            
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9); 
+            color: Black;
+            margin: 20px auto;
+
             
         }
         h3 {
@@ -52,38 +52,97 @@
         
         a {
             text-decoration: none;
-            color: yellow;
+            color: black;
             font-size: 20px;
+            font-weight: 600;
+            margin-right: 10px;
         }
-
+        .parent {
+            text-align: right;
+        }
         
         span {
-            color: white;
+            color: black;
             margin-left: 10px;
             font-size: 20px;
         }
 
         p {
         font-weight: bold;
-        color: white;
+        color: black;
 }
     .question-title{
         margin-top: -2px;
     }
-
+    .more {
+        color: yellow;
+    }
+    .질문목록화면{
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 10px;
+        width: 200px;
+        border-radius: 20px;
+        display: inline;
+        margin-right: 10px;
+    }
+    .질문목록화면:hover {
+        background-color: rgba(255, 255, 255, 0.5);
+    }
+    .새질문작성{
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 10px;
+        width: 170px;
+        border-radius: 20px;
+        display: block;
+        margin-top: 15px;
+    }
+    .새질문작성:hover {
+        background-color: rgba(255, 255, 255, 0.5);
+    }
+    .회원정보{
+        margin-top: -10px;
+        color: black;
+        text-align: right;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 10px;
+        border-radius: 15px;
+        font-size: 18px;
+        font-weight: 500;
+        display: inline-block;
+    }
     </style>
 </head>
-<h1>🐳 JIEUN의 질문 목록 웹페이지 입니다 🐳</h1>
-        <h1 ></h1>
-        <h1 >질문 목록 화면</h1>
+{% load static %}
 
-<a href="{% url 'new' %}">새로운 질문 작성하기</a>
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/test2.css' %}">
+{% endblock %}
+<h1>Question List</h1>
+        <h1 ></h1>
+        {% if not user.is_authenticated %}
+        <div class="parent">
+            <a href="{% url 'signup' %}">회원가입하기</a>
+            <a href="{% url 'login' %}">로그인하기</a>
+        {% endif %}
+        {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}">로그아웃하기</a>
+            <p>로그인 한 사람: {{user.username}}</p>
+            <br>
+            
+            <div class="회원정보">
+            아이디: {{user.username}} 닉네임: {{user.nickname}} 대학: {{user.university}} 위치: {{user.location}} 엠비티아이: {{user.mbti}}
+        {% endif %}
+            </div>
+    </div>
+        
+
+<a href="{% url 'new' %}" class="새질문작성">새로운 질문 작성하기</a>
 {% for question in questions.all %}
 <div class="question-box"> <!-- 각 질문에 반투명 박스 적용 -->
     <h3 class="question-title">{{question.title}}</h3>
     {{question.date}}
     <br />
     {{question.summary}}
-    <a href="{%url 'detail' question.id%}">...more</a>
+    <a href="{%url 'detail' question.id%}" class="more">...more</a>
 </div>
 {% endfor %}

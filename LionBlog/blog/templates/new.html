@@ -10,7 +10,8 @@
     <style>
     body {
         font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
-        background-color: #f8f9fa;
+            background: url('https://media.giphy.com/media/nh2UibFn9DEd2/giphy.gif') no-repeat center center fixed;
+            background-size: cover; /* Ensures the entire background is covered */
         margin: 0;
         padding: 0;
         box-sizing: border-box;
@@ -25,9 +26,9 @@
         max-width: 600px;
         margin: 20px auto;
         padding: 20px;
-        background-color: #fff;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: rgba(255, 255, 255, 0.65); /* semi-transparent white */
+            backdrop-filter: blur(10px); /* apply a blur effect */
+            border-radius: 10px;
     }
     
     label {
@@ -37,6 +38,7 @@
     
     input[type="text"],
     textarea {
+        font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
         width: 100%;
         padding: 10px;
         margin-bottom: 10px;
@@ -46,31 +48,39 @@
     }
     
     button {
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-    
-    button:hover {
-        background-color: #0056b3;
-    }
-    
+            font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+            padding: 10px 20px;
+            background-color: #7e93ba;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #4a5f90;
+        }
+        #id_photo{
+            font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+            color: #4a5f90;
+            font-weight: 500;
+        }
+        
+
     </style>
 </head>
 <body>
     {% block content %}
-    <h1>Creating Blog</h1>
+    <h1>Creating Question</h1>
 
     <form action="{% url 'create' %}" method="post" enctype="multipart/form-data">
 
         {% csrf_token %}
         {{ form.as_p }}
+        
         해시태그 <input type="text" name="hashtags" placeholder="해시태그 , 로 구분">
-
+        
 
         <button type="submit">제출</button>
         

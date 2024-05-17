@@ -2,9 +2,8 @@
     <style>
       body {
             font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
-            background-image: url('https://blog.kakaocdn.net/dn/z8QZo/btqDwemyFyI/Xjjt1rN0QBYwMrzXQBWKxK/img.jpg'); 
-            background-size: cover; 
-            background-repeat: no-repeat; 
+            background: url('https://media.giphy.com/media/nh2UibFn9DEd2/giphy.gif') no-repeat center center fixed;
+            background-size: cover; /* Ensures the entire background is covered */
             
             text-align: center; 
             margin: 20px; 
@@ -26,16 +25,19 @@
         }
 
         .content {
-            padding: 20px; 
-            background-color: #f9f9f9; 
-            border-radius: 10px; 
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.65); /* semi-transparent white */
+            backdrop-filter: blur(10px); /* apply a blur effect */
+            border-radius: 10px;
             margin: 0 auto; 
             width: 80%; 
         }
         .text-box {
-        background-color: white;
-        border: 2px solid #ccc;
+            background-color: rgba(255, 255, 255, 0.85); /* semi-transparent white */
+            backdrop-filter: blur(10px); /* apply a blur effect */
+            border-radius: 10px;
         border-radius: 20px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         padding: 20px;
@@ -59,12 +61,41 @@
     h4{
         margin-top: -5px;
     }
+
+    .comment {
+            background-color: rgba(255, 255, 255, 0.85); /* semi-transparent white */
+            backdrop-filter: blur(10px); /* apply a blur effect */
+            border-radius: 10px;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 5px;
+            width: 30%;
+            margin: 5px auto;
+        }
+    .add_comment{
+        top: 10px;
+        font-size: 25px;
+        font-weight: 600;
+        color: white;
+        padding: 10px;
+        background-color: rgba(0,0,0,0.5);
+        border-radius: 10px;
+    }
+    hr{
+        height: 1px;
+        background-color:rgba(0, 0, 0, 0.1);
+    }
     </style>
 </head>
 <body>
 <div class="text-box">
     <h4>{{question.title}}</h4>
     <p>{{question.date}}</p>
+    <br>
+    {% if question.photo %}
+    <img src="{{ question.photo.url }}" alt="" height="200px;">
+    {% endif %}
+    <br>
     <p>{{question.body}}</p>
     <br>
     <div>
@@ -75,22 +106,18 @@
     <a href="{% url 'home' %}">홈으로 돌아가기</a>
     <a href="{% url 'delete' question.id %}">삭제하기</a>
 </div>
-<form action="{% url 'likes' question.id %}" method="post">
-    {% csrf_token %}
-    <button class="like-button" type="submit">❤️</button>
-    <span class="small">
-      {{ question.like_users.count }} 명이 이 글을 좋아합니다.
-    </span>
-</form>
+
 
 
     
 <br>
 
 <hr>
+<br>
 <a class="add_comment" href="{% url 'add_comment' question.id %}">댓글달기</a>
 <br>
 {% for comment in question.comments.all %}
+<br>
     <div class="comment">
         <strong class="username">{{comment.username}}</strong>
         <div class="date">{{comment.created_at }}</div>

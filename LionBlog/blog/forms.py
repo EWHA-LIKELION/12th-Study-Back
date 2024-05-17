@@ -5,7 +5,7 @@ from .models import Question, Comment
 class QuestionForm(forms.ModelForm):
     class Meta:
         model=Question
-        fields=['title','body']
+        fields=['title','body','photo']
 
 class CommentForm(forms.ModelForm):
     class Meta:

@@ -12,6 +12,7 @@ def home(request):
 def detail(request,question_id):
     question_detail = get_object_or_404(Question, pk= question_id)
     question_hashtag=question_detail.hashtag.all()
+    
     return render(request, 'detail.html', {'question': question_detail, 'hashtags':question_hashtag})
 
 def new(request):
@@ -69,13 +70,4 @@ def add_comment(request, question_id):
 
     return render(request, 'add_comment.html', {'form': form })
 
-def likes(request, question_id):
-    if request.method == "POST":
-        bucket = Question.objects.get(id=question_id)
-        if request.user in bucket.like_users.all():
-            bucket.like_users.remove(request.user)
-        else:
-            bucket.like_users.add(request.user)
-        return redirect('detail', question_id=question_id)
-    else:
-        return HttpResponse('Invalid request method', status=405)
+
