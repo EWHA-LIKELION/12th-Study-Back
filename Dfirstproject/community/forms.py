@@ -10,7 +10,7 @@ class PostForm(forms.ModelForm):
 class CommentForm(forms.ModelForm):
   class Meta:
     model = Comment
-    fields = ['username', 'comment_text']
+    fields = ['comment_text']
 
 class RecommendForm(forms.ModelForm):
   class Meta:

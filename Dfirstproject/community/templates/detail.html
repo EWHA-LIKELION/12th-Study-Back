@@ -5,13 +5,35 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{question.title}}</title>
-  <link rel="stylesheet" href="/static/css/detail.css" />
+  <link rel="stylesheet" href="../static/css/detail.css" />
   <script src="https://kit.fontawesome.com/892199cbed.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <header>
-    <a class="logo" href="{% url 'main'%}"><span id="navher">NAVHER</span> <span id="in">지민iN</span></a>
-  </header>
+    <div class="header-top">
+      <span>
+        <a class="logo" href="{% url 'main'%}">
+          <span id="navher">NAVHER</span>
+          <span id="in">지민iN</span>
+        </a>
+      </span>
+      <span class="login">
+        {% if not user.is_authenticated %}
+        <a href="{% url 'signup' %}">회원가입</a>
+        <a href="{% url 'login' %}">로그인</a>
+        {% endif %}
+        {% if user.is_authenticated %}
+        <div class="userInfo">
+          <span><img src="{{user.pro_pic.url}}"></span>
+          <span class="user">{{user.major}}</span> 전문가 <span class="user">{{user.nickname}}</span>님 반갑습니다.
+          <span><a href="{% url 'logout' %}">로그아웃</a></span>
+        </div>
+          
+        {% endif %}
+      </span>
+    </div>
+    
+  <header>
   
   <div class="containerContent">
     <span class="name"><span id="Q">Q</span> {{ question.title }}</span>
@@ -28,19 +50,64 @@
       {% endfor %}
     </div>
     <div class="like">
-      <p><a class="add_recommend" href="{% url 'add_recommend' pk=question.id %}">♡</a> {{ question.recommend_count }}</p>
+      <form action="{% url 'likes' pk=question.id %}" method="POST">
+        {% csrf_token %}
+        <button style="border:none; background-color: transparent;">
+          {% if request.user in question.like_users.all %}
+            <p class="add_recommend" style="color: red; font-size: 13px;">♥</p>
+          {% else %}
+            <p class="add_recommend" style="font-size: 13px;">♡</p>
+          {% endif %}
+        </button>
+        <span class="small">
+          {{ question.like_users.all|length }}
+        </span>
+      </form>
     </div>
+
     <div class="mod">
       <a class="modify" href="{% url 'update' pk=question.id %}">수정</a>
       <a class="modify" href="{% url 'delete' pk=question.id %}">삭제</a>
     </div>
   </div>
-  
+  <!-- {% block content %}
+  <div class="comment-form">
+    <form class="post-form" method="POST" action="{% url 'add_comment' pk=question.id %}" >
+
+      {% csrf_token %}
+      {{form.as_p}}
+      <p>제목: <input type="text" name="title"></p>
+      본문 : <textarea name="content" cols="30" rows="10"></textarea>
+      <button type="submit" class="save btn btn-default">제출</button>
+      
+    </form>
+  </div>
+  {% endblock %} -->
   <div class="commentContainer">
     <a class="add_comment" href="{% url 'add_comment' pk=question.id %}">답변달기</a>
     {% for comment in question.comments.all %}
       <div class="comment">
-        <strong class="Cusername">{{ comment.username }}</strong>
+        <span class="firstS">
+          <span class="commentUser">
+            <img class="userimage" src="{{ comment.user.pro_pic.url }}">
+            <span>
+              <strong class="Cusername">{{ comment.user.major }}</strong>
+              전문가 
+              <strong class="Cusername">{{ comment.user.nickname }}</strong>
+            </span>
+          
+            
+          </span>
+          <span>
+            {% if user == comment.user %}
+              <form action="{% url 'comments_delete' pk=question.id comment_pk=comment.pk %}" method="POST">
+                {% csrf_token %}
+                <input type="submit" value="X" class="commentDelete">
+              </form>
+            {% endif %}
+          </span>
+        </span>
+        
         <div class="Cdate">{{ comment.created_at }}</div>
         <p class="Ccomment_text">{{ comment.comment_text | linebreaks }}</p>
       </div>

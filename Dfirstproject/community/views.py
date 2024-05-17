@@ -100,7 +100,7 @@ def update(request, pk):
 
 def add_comment(request, pk):
     # pk는 어떤 질문(Question)에 대한 ID인지를 나타냅니다.
-
+  if request.user.is_authenticated:
     question = get_object_or_404(Question, pk=pk)
 
     if request.method == 'POST':
@@ -108,7 +108,8 @@ def add_comment(request, pk):
 
         if form.is_valid():
             comment = form.save(commit=False)
-            comment.question = question 
+            comment.question = question
+            comment.user= request.user
             # if (comment.is_like):
             #   question.like_count = question.like_count + 1
             # question.save()
@@ -118,21 +119,39 @@ def add_comment(request, pk):
     else:
         form = CommentForm()
 
-    return render(request, 'add_comment.html', {'form': form})
+        return render(request, 'add_comment.html', {'form': form})
 
-def add_recommend(request, pk):
-  question = get_object_or_404(Question, pk=pk)
-  if request.method == 'POST':
-    form = RecommendForm(request.POST)
+def comments_delete(request, pk, comment_pk):
+  if request.user.is_authenticated:
+    comment = get_object_or_404(Comment, pk = comment_pk)
+    if request.user == comment.user:
+      comment.delete()
+  return redirect('detail', pk)
 
-    if form.is_valid():
-      recommend = form.save(commit=False)
-      recommend.question = question
-      if (recommend.is_recommend):
-        question.recommend_count = question.recommend_count + 1
-      question.save()
-      recommend.save()
-      return redirect('detail', pk)
-  else:
-    form = RecommendForm()
-  return render(request, 'add_recommend.html', {'form': form})
+# def add_recommend(request, pk):
+#   question = get_object_or_404(Question, pk=pk)
+#   if request.method == 'POST':
+#     form = RecommendForm(request.POST)
+
+#     if form.is_valid():
+#       recommend = form.save(commit=False)
+#       recommend.question = question
+#       if (recommend.is_recommend):
+#         question.recommend_count = question.recommend_count + 1
+#       question.save()
+#       recommend.save()
+#       return redirect('detail', pk = pk)
+#   else:
+#     form = RecommendForm()
+#     return render(request, 'add_recommend.html', {'form': form})
+
+def likes(request, pk):
+  if request.user.is_authenticated:
+    question = get_object_or_404(Question, pk = pk)
+    if question.like_users.filter(pk=request.user.pk).exists():
+      question.like_users.remove(request.user)
+    else:
+      question.like_users.add(request.user)
+
+    return redirect('detail', pk)
+  return redirect('login')

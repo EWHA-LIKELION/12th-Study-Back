@@ -11,6 +11,61 @@
   font-weight: normal;
   font-style: normal;
 }
+.user{
+  font-weight: 700;
+}
+
+.header-top{
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+/* 로그인/회원가입 폼 전체에 대한 스타일 */
+.login {
+  text-align: center; /* 텍스트를 가운데 정렬 */
+}
+
+/* 로그인/회원가입 링크에 대한 스타일 */
+.login a {
+  display: inline-block; /* 링크를 인라인 요소로 표시 */
+  margin: 10px; /* 링크 간격 조정 */
+  padding: 4px 8px; /* 링크 패딩 설정 */
+  background-color: #ffffff; /* 배경색 */
+  color: rgb(64, 64, 64); /* 글자색 */
+  text-decoration: none; /* 밑줄 제거 */
+  border-radius: 1px; /* 링크 모서리 둥글게 만들기 */
+  border: 1px solid #555;
+}
+
+
+
+/* 유저 정보에 대한 스타일 */
+.userInfo {
+  margin-top: 20px; /* 유저 정보 상단 여백 */
+}
+
+.userInfo img {
+  width: 40px; /* 프로필 이미지 크기 조정 */
+  height: 40px;
+  border-radius: 50%; /* 원형 모양으로 프로필 이미지 표시 */
+  margin-right: 10px; /* 이미지 우측 여백 */
+}
+
+.userInfo span {
+  vertical-align: middle; /* 텍스트 수직 정렬 */
+}
+
+.userInfo a {
+  color: #4f4f4f; /* 로그아웃 링크 색상 */
+  text-decoration: none; /* 밑줄 제거 */
+  font-size: 12.5px;
+}
+
+.userInfo a:hover {
+  text-decoration: underline; /* 호버 시 밑줄 표시 */
+}
+
 
 body {
   font-family: 'Pretendard-Regular';
