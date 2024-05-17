@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone;
+from django.conf import settings;
 
 
 # Create your models here.
@@ -15,7 +16,7 @@ class Question(models.Model):
     upload_time = models.DateTimeField(unique=True, default=timezone.now)
     content = models.TextField('Content')
     hashtag = models.ManyToManyField(HashTag)
-    like = models.IntegerField(default=0)
+    likes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='likeQuestions')
 
     def __str__(self):
         return self.title

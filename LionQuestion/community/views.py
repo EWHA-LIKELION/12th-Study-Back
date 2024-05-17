@@ -34,6 +34,17 @@ def create(request):
         return redirect(request, 'detail.html', new_question.id)
     return redirect('home')
 
+def likes(request, question_id):
+    if request.user.is_authenticated:
+        question = get_object_or_404(Question, pk=question_id)
+
+        if question.likes.filter(pk=request.user.pk).exists():
+            question.likes.remove(request.user)
+        else:
+            question.likes.add(request.user)
+        return redirect('detail', question_id=question_id)
+    return redirect('home')
+
 def delete(request, question_id):
     question_delete=get_object_or_404(Question, pk=question_id)
     question_delete.delete()
@@ -56,17 +67,14 @@ def update(request, question_id):
         return render(request, 'update.html', {'question': question_update})
     
 def add_comment(request, question_id):
-    blog = get_object_or_404(Question, pk=question_id)
-
+    question = get_object_or_404(Question, pk=question_id)
     if request.method=='POST':
         form=CommentForm(request.POST)
-
         if form.is_valid():
             comment = form.save(commit=False)
-            comment.Question=blog
+            comment.question = question
             comment.save()
-            return redirect(request, 'detail.html', question_id)
+            return render(request, 'detail.html', {'question': question})
     else : 
         form = CommentForm()
-    
     return render(request, 'add_comment.html', {'form':form})

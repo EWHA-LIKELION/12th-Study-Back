@@ -7,3 +7,4 @@ class CustomUser(AbstractUser):
     university=models.CharField(max_length=50)
     location=models.CharField(max_length=200)
     email=models.CharField(max_length=100)
+    potatopower=models.CharField(max_length=5, default=None)
