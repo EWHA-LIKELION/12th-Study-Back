@@ -1,7 +1,15 @@
 <h3>{{question.title}}</h3>
 {{question.upload_time}}
+
 <br />
+
+{% if question.photo %}
+<img src="{{ question.photo.url }}" alt="" height="200px;">
+{% endif %}
+
+<br>
 {{question.content}}
+<br />
 <div>
     {% for hashtag in hashtags.all %}
     #{{ hashtag }}
@@ -27,11 +35,22 @@
 <br/ >
 <a href="{% url 'delete' question.id %}">삭제</a>
 <a href="{% url 'update' question.id %}">수정</a>
+<a href="{% url 'home' %}">홈으로 돌아가기</a>
 <hr>
 
 <br/ >
 <a class = "add_comment" href="{% url 'add_comment' question.id %}">답변 달기</a>
 
+<br>
+댓글 달기
+<form method="POST">
+  닉네임 {{ user.username }}
+  {% csrf_token %}
+  <input name="comment_text" type="text" value="">
+  <input class="Comment" type="submit" value="+">
+</form>
+
+<br>
 {% for comment in question.comments.all %}
     <div class="comment">
         <strong class="username">{{ comment.username }}</strong>
