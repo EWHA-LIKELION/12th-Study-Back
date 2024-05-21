@@ -22,6 +22,9 @@ from django.contrib import admin
 import community
 import community.views
 import accounts.views
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -37,4 +40,4 @@ urlpatterns = [
     path('accounts/login', accounts.views.login_view, name="login"),
     path('accounts/logout', accounts.views.logout_view, name="logout"),
     path('accounts/signup', accounts.views.signup_view, name="signup"),
-    ]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
