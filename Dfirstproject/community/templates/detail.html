@@ -88,6 +88,11 @@
     <div class="container">
         <h1>{{ post.title }}</h1>
         <span>{{ post.upload_time }}</span>
+        <br>
+        {% if post.photo %}
+        <img src="{{ post.photo.url }}" alt="" height="200px;">
+        {% endif %}
+        <br>
         <div class="content">{{ post.content }}</div>
         <div>
             {% for hashtag in post.hashtag.all %}
