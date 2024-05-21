@@ -15,15 +15,14 @@ def detail(request, question_id):
     return render(request, 'detail.html', {'question':question_detail, 'hashtags':question_hashtag})
 
 def new(request):
-    return render(request, 'new.html')
+    form=QuestionForm()
+    return render(request, 'new.html', {'form': form})
     
 def create(request):
-    form = QuestionForm(request.Post, request.FILES)
-    if form.is_vaild() :
-        new_question = Question()
-        new_question.content = request.POST['body']
-        new_question.title = request.POST['title']
-        new_question.update_time = timezone.now()
+    form = QuestionForm(request.POST, request.FILES)
+    if form.is_valid() :
+        new_question=form.save(commit=False)
+        new_question.date=timezone.now()
         new_question.save()
 
         hashtags=request.POST['hashtags']
@@ -31,7 +30,7 @@ def create(request):
         for tag in hashtag:
             new_hashtag=HashTag.objects.get_or_create(hashtag=tag)
             new_question.hashtag.add(new_hashtag[0])
-        return redirect(request, 'detail.html', new_question.id)
+        return redirect('detail', new_question.id)
     return redirect('home')
 
 def likes(request, question_id):
@@ -74,7 +73,7 @@ def add_comment(request, question_id):
             comment = form.save(commit=False)
             comment.question = question
             comment.save()
-            return render(request, 'detail.html', {'question': question})
+            return redirect('detail', question_id)
     else : 
         form = CommentForm()
     return render(request, 'add_comment.html', {'form':form})
