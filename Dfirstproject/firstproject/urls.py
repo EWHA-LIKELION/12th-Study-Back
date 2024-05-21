@@ -19,6 +19,10 @@ from django.urls import path
 from community.views import List, detail
 
 import community.views
+import accounts.views 
+
+from django.conf import settings
+from django.conf.urls.static import static 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,6 +34,7 @@ urlpatterns = [
     path('delete/<int:question_id>', community.views.delete,name="delete"),
     path('update/<int:question_id>', community.views.update,name="update"),
     path('<int:question_id>/comment', community.views.add_comment,name="add_comment"),
-    path('like/<int:question_id>',community.views.likes,name="likes"),
-
-]
+    path('accounts/login', accounts.views.login_view, name="login"),
+    path('accounts/logout', accounts.views.logout_view,name="logout"),
+    path('acconuts/signup', accounts.views.signup_view,name="signup")
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

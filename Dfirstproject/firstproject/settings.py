@@ -11,9 +11,23 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+STATIC_URL= 'static/'
+
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+STATICFILES_DIRS = [
+                    BASE_DIR / 'static', 
+                    os.path.join(BASE_DIR, 'community', 'static'),
+]
+
+STATIC_ROOT = os.path.join('staticfiles')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -27,7 +41,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
-
+AUTH_USER_MODEL='accounts.CustomUser'
 # Application definition
 
 INSTALLED_APPS = [
@@ -37,7 +51,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'community'
+    'community',
+    'accounts'
 ]
 
 MIDDLEWARE = [
