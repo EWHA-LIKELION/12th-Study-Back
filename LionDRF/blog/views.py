@@ -9,11 +9,20 @@ from .serializers import *
 class QuestionList(views.APIView):
     def get(self, request, format=None):
         question = Question.objects.all()
+
         keyword = request.GET.get('keyword', None)
         if keyword:
             question = Question.objects.filter(title__icontains=keyword)
         else:
             question = Question.objects.all()
+
+        order = request.GET.get('order', '최신순')  
+
+        if order == '오래된순':
+            question = Question.objects.order_by('date')
+        else:
+            question = Question.objects.order_by('-date')
+
         serializer = QuestionSerializer(question, many=True)
         return Response({"count":Question.objects.count(), "question": serializer.data})
     
