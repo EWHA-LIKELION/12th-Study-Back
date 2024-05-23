@@ -8,6 +8,7 @@ from .serializers import QuestionSerializer
 
 # Create your views here.
 
+
 class QuestionList(views.APIView):
     def get(self, request, format=None):
         keyword = request.GET.get('keyword', None)
@@ -17,7 +18,7 @@ class QuestionList(views.APIView):
             questions = Question.objects.filter(title__icontains=keyword)
         else:
             questions = Question.objects.all()
-
+        print(sort_option)
         if sort_option == 'latest':
             questions = questions.order_by('-date')  # 최신순 정렬
         elif sort_option == 'oldest':
