@@ -19,7 +19,7 @@ class QuestionList(views.APIView):
       questions=questions.order_by('-upload_time')
     serializer = QuestionSerializer(questions, many=True)
     response_data = {
-      "count":Question.objects.count(),
+      "count":questions.count(),
       "questions": serializer.data
     }
     return Response(response_data) 
