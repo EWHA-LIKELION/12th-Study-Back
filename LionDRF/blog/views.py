@@ -9,10 +9,10 @@ from .serializers import *
 # Create your views here.
 class QuestionList(views.APIView):
   def get(self, request, format = None):
-    keyword = request.GET.get('keyword')
+    category = request.GET.get('category')
     order = request.GET.get('order')
-    if keyword:
-      questions = Question.objects.filter(category__icontains=keyword)
+    if category:
+      questions = Question.objects.filter(category__icontains=category)
     else:
       questions = Question.objects.all()
     if order == "desc":
