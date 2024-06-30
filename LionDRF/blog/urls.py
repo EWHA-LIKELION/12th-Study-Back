@@ -7,4 +7,5 @@ urlpatterns = [
     path('', QuestionList.as_view()),
     path('<int:pk>/', QuestionDetail.as_view()),
     path('create/', QuestionList.as_view()),
+    path('comments/', CommentView.as_view()),
 ]
