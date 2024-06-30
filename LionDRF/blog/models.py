@@ -1,7 +1,7 @@
 from django.db import models
 import os
 from django.utils import timezone
-
+from api.models import *
 # Create your models here.
 SUBJECTS = (
   ('교육, 학문', '교육, 학문'),
@@ -21,6 +21,8 @@ SUBJECTS = (
 
 class Question(models.Model):
   title = models.CharField('제목', max_length=50)
+  user=models.ForeignKey(User, related_name="writer", on_delete=models.CASCADE, null=True)
+  like_users = models.ManyToManyField(User,related_name="like_question")
   upload_time = models.DateTimeField(default=timezone.now)
   content = models.TextField('내용')
   image = models.ImageField('사진', blank=True)
@@ -31,3 +33,13 @@ class Question(models.Model):
   
   def get_filename(self):
     return os.path.basename(self.file.name)
+  
+class Comment(models.Model):
+  question=models.ForeignKey(Question, related_name="comments", on_delete=models.CASCADE)
+  user=models.ForeignKey(User, related_name="answer", on_delete=models.CASCADE, null=True)
+  comment_text=models.TextField()
+  created_at=models.DateTimeField(default=timezone.now)
+
+  def __str__(self):
+    return self.comment_text
+  
